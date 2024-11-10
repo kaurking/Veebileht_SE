@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sisend</title>
 </head>
 <body>
-    <h1>Algus</h1>
-    <p>Superlux</p>
-    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Sitaks kõva</a>
+    <p><a href="vaadatud.html">Vaadatud/loetud</a>
+        <a href="plaanis.html">Plaanis</a>
+        <a href="profiil.html">Profiil</a>
+    </p>
+    <form action="/submit" method="POST">
+        <input id="nimi" name="nimi" placeholder="Nimetus">
+    
+        <input id="kestvus" name="kestvus" placeholder="Kestvus">
+
+        <select id="kumb" name="kumb">
+            <option value="vaadatud">Läbi</option>
+            <option value="plaanis">Plaanis/pooleli</option>
+        </select>
+        <button id = "submit" type="submit">Lisa</button>
+    </form>
 </body>
 </html>
