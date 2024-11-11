@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="kujundus_üldine.css">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,20 +7,28 @@
     <link rel="stylesheet" href ="kujundus_üldine.css">
 </head>
 <body>
-    <p><a href="vaadatud.html">Vaadatud/loetud</a>
-        <a href="plaanis.html">Plaanis</a>
-        <a href="profiil.html">Profiil</a>
-    </p>
-    <form action="/submit" method="POST">
-        <input id="nimi" name="nimi" placeholder="Nimetus">
-    
-        <input id="kestvus" name="kestvus" placeholder="Kestvus">
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="main.html">Sisend</a></li>
+            <li><a href="vaadatud.html">Vaadatud/loetud</a></li>
+            <li><a href="plaanis.html">Plaanis</a></li>
+            <li><a href="profiil.html">Profiil</a></li>
+        </ul>
+    </nav>
+    <h1>Tee uus sissekanne</h1>
+    <div class="form">
+        <form action="/submit" method="POST">
+            <input id="nimi" name="nimi" placeholder="Nimetus">
+        
+            <input id="kestvus" name="kestvus" placeholder="Kestvus">
 
-        <select id="kumb" name="kumb">
-            <option value="vaadatud">Läbi</option>
-            <option value="plaanis">Plaanis/pooleli</option>
-        </select>
-        <button id = "submit" type="submit">Lisa</button>
-    </form>
+            <select id="kumb" name="kumb" required>
+                <option value="" disabled selected>--</option>
+                <option value="vaadatud">Läbi</option>
+                <option value="plaanis">Plaanis/pooleli</option>
+            </select>
+            <button id = "submit" type="submit">Lisa</button>
+        </form>
+    </div>
 </body>
 </html>

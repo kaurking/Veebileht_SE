@@ -1,3 +1,44 @@
 p a {
     margin-right: 20px;
 }
+
+h1 {
+    padding-left: 80px;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: left;
+    background-color: lightslategray;
+    padding: 0.5rem;
+    width: 100%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 29px;
+}
+
+.nav-links a:hover {
+    color: #00aced;
+}
+
+.form {
+    padding-left: 80px;
+}
