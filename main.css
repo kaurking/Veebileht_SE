@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #AAB9CF;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+header{
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    background-color:#AAB9CF;
+}
+
+.search{
+    background-color: transparent;
+    border: 2px solid #637074;
+    padding: 1.1rem 7rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    color: #ffffff;
+    font-family: inherit;
+    box-shadow: 5px 5px 10px rgba(11, 0, 0, 0.5);
+}
+
+.search:focus{
+    outline:0;
+    background-color: #8693AB;
+}
+
+.search::placeholder{
+    color: rgb(78, 77, 78)
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.movie {
+    width: 250px;
+    margin: 1rem;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+    background-color: #637074;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset;
+    box-shadow: 5px 5px 10px rgba(11, 0, 0, 0.5);
+    border-radius: 20px;
+}
+
+.movie img{
+    width: 100%;
+    transition: opacity 0.3s ease;
+}
+
+.movie-info{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}
+
+.movie-info h3{
+    margin-top: 0;
+}
+
+.movie-info span{
+    background-color: #8693AB;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.movie-info span.orange{
+    color: black;
+}
+
+.movie-info span.green{
+    color: rgb(0, 0, 0);
+}
+
+.overview{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: whitesmoke;
+    padding: 1rem;
+    max-height: 100%;
+    transform: translateY(101%);
+    transition: transform 0.3s ease-in;
+}
+
+.movie:hover .overview{
+    transform: translateY(0);
+}
+
+.movie:hover {
+    transform: scale(1.05); /* Suurendab kaarti 5% võrra */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease; /* Sujuv üleminek */
+}
+
+.movie:hover img {
+    opacity: 0.85; /* Pilt muutub veidi tumedamaks */
+}
+
+/* Filmikaardi stiilid */
+.movie {
+    position: relative; /* Vajalik nupu korrektseks paigutamiseks */
+}
+
+/* + nupu stiilid */
+.movie .nupp_postril {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: #8693AB; /* Nupu taustavärv */
+    border: none;
+    border-radius: 50%; /* Nupp ringikujuline */
+    color: white; /* Nupu tekstivärv */
+    font-size: 1.2rem; /* Teksti suurus */
+    font-weight: bold;
+    cursor: pointer; /* Hiirega peale minnes näitab, et see on vajutatav */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Varju lisamine */
+    z-index: 10;
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Animatsioonid */
+}
+
+/* Hover efekt nupule */
+.nupp_postril:hover {
+    background-color: #637074; /* Hoveri ajal muutub tumedamaks */
+    transform: scale(1.1); /* Hoveri ajal muutub veidi suuremaks */
+}
+
+.nupp_postril:focus {
+    outline: none; /* Eemalda fokuseerimise äärejoon */
+    background-color: #4f5a63; /* Väike muudatus taustavärvis */
+}
