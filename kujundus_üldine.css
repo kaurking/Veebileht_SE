@@ -14,7 +14,7 @@ body {
 .navbar {
     display: flex;
     justify-content: left;
-    background-color: lightslategray;
+    background-color: #212227;
     padding: 0.5rem;
     width: 100%;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -31,7 +31,7 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: black;
+    color: whitesmoke;
     font-size: 29px;
 }
 

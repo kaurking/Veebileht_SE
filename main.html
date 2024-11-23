@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sisend</title>
     <link rel="stylesheet" href ="kujundus_üldine.css">
+    <link rel="stylesheet" href= "main.css">
 </head>
 <body>
     <nav class="navbar">
@@ -15,20 +16,31 @@
             <li><a href="profiil.html">Profiil</a></li>
         </ul>
     </nav>
-    <h1>Tee uus sissekanne</h1>
-    <div class="form">
-        <form action="/submit" method="POST">
-            <input id="nimi" name="nimi" placeholder="Nimetus">
-        
-            <input id="kestvus" name="kestvus" placeholder="Kestvus">
 
-            <select id="kumb" name="kumb" required>
-                <option value="" disabled selected>--</option>
-                <option value="vaadatud">Läbi</option>
-                <option value="plaanis">Plaanis/pooleli</option>
-            </select>
-            <button id = "submit" type="submit">Lisa</button>
+    <header>
+        <form id="form">
+            <input type="text" id="search" placeholder="Otsi filme..." required
+            class="search">
         </form>
-    </div>
+    </header>
+
+    <main id="main">
+        <div class="movie">
+            <button class ="nupp_postril">+</button>
+            <img src="pilt1.png" alt="image">
+            <div class="movie-info">
+                <h3>Movie Title</h3>
+                <span class="green">9.5</span>
+            </div>
+
+            <div class="overview">
+                <h3>Overview</h3>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias inventore doloribus eos delectus laboriosam vel, non consequuntur fugit voluptate veritatis?
+            </div>
+        </div>
+        
+    </main>
+    
+    <script src="pealeht.js"></script>
 </body>
 </html>
