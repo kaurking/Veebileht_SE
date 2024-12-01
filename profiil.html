@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vaadatud/loetud nimekiri</title>
     <link rel="stylesheet" href="kujundus_üldine.css">
+    <link rel="stylesheet" href="profiil.css">
 </head>
 <body>
     <nav class="navbar">
@@ -15,14 +16,25 @@
             <li><a href="profiil.html">Profiil</a></li>
         </ul>
     </nav>
-    <h1>Sinu profiil</h1>
-    <form id="upload-form">
-        <label for="profile-picture">Vali profiilipilt:</label>
-        <input type="file" id="profile-picture" accept="image/*" required>
-        <div id="preview-container">
-            <img id="preview" src="#" alt="Profile Preview" style="display: none;">
-        </div>
-    </form>
+    <h1 class="h1">Sinu profiil: </h1>
+    <div class="card">
+        <form id="profile-form">
+            <input id="username" type="text" placeholder="Sisesta kasutajanimi" maxlength="30">
+        </form>
+        <form id="upload-form">
+            <label for="profile-picture">Vali profiilipilt:</label>
+            <input type="file" id="profile-picture" accept="image/*" required>
+            <div id="preview-container">
+                <img id="preview" src="#" alt="Profile Preview" style="display: none;">
+            </div>
+        </form>
+        <button id="save-button">Salvesta</button>
+        <p id="message"></p>
+
+        <p>Vaadatud/loetud on X sisestust.</p>
+        <p>Plaanis on X sisestust</p>
+    </div>
+
     <script src="profpilt.js"></script>
 </body>
 </html>
