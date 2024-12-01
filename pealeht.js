@@ -16,7 +16,6 @@ function getMovies(url) {
   fetch(url).then(res => res.json()).then(data => {
     console.log(data.results)
     showMovies(data.results);
-
   })
 }
 
@@ -29,11 +28,13 @@ function showMovies(data) {
     movieEl.classList.add("movie");
     movieEl.innerHTML = `
     <button class="nupp_postril">+</button>
+    <div class="dropdown hidden">
+      <button class="dropdown-item" onclick="markAsWatched('${title}')">Vaadatud</button>
+      <button class="dropdown-item" onclick="markAsToWatch('${title}')">Vaatamiseks</button>
+    </div>
     <img src="${IMG_URL+poster_path}" alt="${title}">
             <div class="movie-info">
                 <h3>${title}</h3>
-                <span class="${getColor(vote_average)}">${vote_average}
-                </span>
             </div>
 
             <div class="overview">
@@ -42,7 +43,40 @@ function showMovies(data) {
             </div>`
     main.appendChild(movieEl);
   })
+  setupDropdowns(); // Seome dropdowni sündmused pärast elementide loomist
+}
+function setupDropdowns() {
+  document.querySelectorAll(".nupp_postril").forEach(button => {
+    const dropdown = button.nextElementSibling;
 
+    button.addEventListener("click", (e) => {
+      e.stopPropagation(); // Takistab sündmuse levikut
+
+      // Sulge kõik teised dropdownid
+      document.querySelectorAll(".dropdown").forEach(otherDropdown => {
+        if (otherDropdown !== dropdown) {
+          otherDropdown.classList.add("hidden");
+        }
+      });
+
+      // Lülita praeguse dropdowni nähtavus
+      dropdown.classList.toggle("hidden");
+    });
+  });
+
+  // Peidame kõik dropdownid, kui klikitakse mujale
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".dropdown").forEach(dropdown => {
+      dropdown.classList.add("hidden");
+    });
+  });
+}
+function markAsWatched(title) {
+  alert(`"${title}" märgiti vaadatuks!`);
+}
+
+function markAsToWatch(title) {
+  alert(`"${title}" lisati vaatamise plaani!`);
 }
 
 function getColor(vote) {
@@ -65,4 +99,4 @@ form.addEventListener('submit', (e) => {
   }else{
     getMovies(API_URL);
   }
-})
+});

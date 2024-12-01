@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sisend</title>
     <link rel="stylesheet" href ="kujundus_üldine.css">
-    <link rel="stylesheet" href= "main.css">
+    <link rel="stylesheet" href= "filmide_kujundus.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <nav class="navbar">
@@ -27,6 +29,10 @@
     <main id="main">
         <div class="movie">
             <button class ="nupp_postril">+</button>
+            <div class="dropdown">
+                <button class="dropdown-item" onclick="markAsWatched()">Vaadatud</button>
+                <button class="dropdown-item" onclick="markAsToWatch()">Vaatamiseks</button>
+            </div>
             <img src="pilt1.png" alt="image">
             <div class="movie-info">
                 <h3>Movie Title</h3>
