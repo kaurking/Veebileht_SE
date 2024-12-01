@@ -1,0 +1,97 @@
+
+.h1 {
+    padding-left: 80px;
+}
+
+#username {
+    font-size: 2rem; 
+    font-weight: bold; 
+    border: none; 
+    border-bottom: 2px solid #ccc;
+    outline: none; 
+    text-align: center;
+    width: 80%; 
+    margin: 20px auto; 
+    display: block; 
+}
+
+#username:focus {
+    border-bottom: 2px solid #cce5ff;
+}
+
+#preview {
+    width: 250px;
+    height: 250px; 
+    object-fit: cover; 
+    border-radius: 7%; 
+}
+
+#preview-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 250px; 
+    width: 250px; 
+    margin: 0 auto; 
+    border-radius: 7%; 
+    overflow: hidden; 
+    padding-top: 16px;
+    padding-bottom: 6px;
+}
+
+input[type="file"] {
+    display: none; /* Hides the default file input */
+}
+
+label{
+    cursor: pointer; 
+    background: #e2f0ff; 
+    color: rgb(0, 0, 0);
+    padding: 10px 15px; 
+    border-radius: 5px;
+}
+
+label:hover{
+    background-color: #acd3ff;
+}
+
+form{
+    text-align: center;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    text-align: center;
+    font-family: arial;
+    margin-left: 40px;
+}
+
+.card h1{
+    text-align: center;
+    padding-top: 10px;
+}
+  
+button {
+    background-color: #e2f0ff;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 30%;
+    font-size: 16px;
+    display: block; 
+    margin: 0 auto; 
+}
+
+button:hover {
+    background-color: #acd3ff;
+}
+
+#message {
+    margin-top: 10px;
+    text-align: center;
+    color: green;
+}
