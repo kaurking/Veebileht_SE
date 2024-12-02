@@ -8,23 +8,80 @@ body{
     margin: 0;
 }
 
-header{
+main, #watched-list, #to-watch-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
     padding: 1rem;
+    justify-content: center;
+}
+
+header{
     display: flex;
     justify-content: center;
+    padding: 1.1rem;
+}
+
+.movie {
+    border-radius: 2px;
+    width: 315px;
+    margin: 0.8rem;
+    background-color: #637074;
+    overflow: hidden;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px rgba(11, 0, 0, 0.5);
+    box-shadow: inset;
+}
+
+.movie img{
+    width: 100%;
+    transition: opacity 0.4s ease;
+}
+
+.movie-info{
+    color: rgb(226, 223, 223);
+    padding: 0.5rem 1rem 1rem;
+    display: flex;
+    align-items: center;
+    height: 115px;
+    justify-content: center;
+    text-shadow: 0 0 5px #1b1b1b, 0 0 10px #000000, 0 0 15px #9ea0a0;
+    letter-spacing: 0.8px;
+    text-align: center;
+    font-size: 1.35rem;
+}
+
+.movie-info span{
+    border-radius: 4px;
+    background-color: #8693AB;
+    padding: 0.25rem 0.5rem;
+    font-weight: bold;
+}
+
+.overview{
+    max-height: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(185, 185, 185);
+    position: absolute;
+    padding: 1rem;
+    transition: transform 0.3s ease-in;
+    transform: translateY(101%);
 }
 
 .search{
     background-color: transparent;
-    border: 2px solid #637074;
     padding: 1.1rem 7rem;
     border-radius: 50px;
+    box-shadow: 5px 5px 10px rgba(11, 0, 0, 0.5);
+    border: 2px solid #637074;
+    font-family: 'Comic+Neue', sans-serif;
     font-size: 1.5rem;
     color: rgb(220, 221, 221);
-    font-family: 'Comic+Neue', sans-serif;
-    box-shadow: 5px 5px 10px rgba(11, 0, 0, 0.5);
-    text-align: center;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    text-align: center;
 }
 
 .search:focus{
@@ -38,74 +95,17 @@ header{
     color: rgb(78, 77, 78)
 }
 
-main, #watched-list, #to-watch-list{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px; /* Kaartide vahe */
-    padding: 1rem;
-}
-
-.movie {
-    width: 300px;
-    margin: 1rem;
-    border-radius: 3px;
-    background-color: #637074;
-    position: relative;
-    overflow: hidden;
-    box-shadow: inset;
-    box-shadow: 5px 5px 10px rgba(11, 0, 0, 0.5);
-    border-radius: 20px;
-}
-
-.movie img{
-    width: 100%;
-    transition: opacity 0.3s ease;
-}
-
-.movie-info{
-    color: rgb(226, 223, 223);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem 1rem;
-    letter-spacing: 0.5px;
-    text-shadow: 0 0 5px #1b1b1b, 0 0 10px #000000, 0 0 15px #9ea0a0;
-    font-size: 1.3rem;
-    height: 115px;
-    text-align: center;
-}
-
-.movie-info span{
-    background-color: #8693AB;
-    padding: 0.25rem 0.5rem;
-    border-radius: 3px;
-    font-weight: bold;
-}
-
-.overview{
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: whitesmoke;
-    padding: 1rem;
-    max-height: 100%;
-    transform: translateY(101%);
-    transition: transform 0.2s ease-in;
+.movie:hover {
+    transform: scale(1.05); 
+    transition: transform 0.3s ease;
 }
 
 .movie:hover .overview{
-    transform: translateY(0); /*tõstab overview ette hoverimisel */
-}
-
-.movie:hover {
-    transform: scale(1.05); /* Suurendab kaarti 5% võrra */
-    transition: transform 0.3s ease; /* Sujuv üleminek */
+    transform: translateY(0); 
 }
 
 .movie:hover img {
-    opacity: 0.85; /* Pilt muutub veidi heledamaks */
+    opacity: 0.85; 
 }
 
 /* + nupu stiilid */
@@ -115,33 +115,33 @@ main, #watched-list, #to-watch-list{
     right: 10px;
     width: 40px;
     height: 40px;
-    background-color: #8693AB; /* Nupu taustavärv */
+    background-color: #8693AB; 
     border: none;
-    border-radius: 50%; /* Nupp ringikujuline */
-    color: white; /* Nupu tekstivärv */
-    font-size: 1.3rem; /* Teksti suurus */
+    border-radius: 50%; 
+    color: white; 
+    font-size: 1.3rem; 
     font-weight: bold;
-    cursor: pointer; /* Hiirega peale minnes näitab, et see on vajutatav */
-    z-index: 10; /* tõstab nupu esile */
-    transition: transform 0.2s ease, background-color 0.3s ease; /* Animatsioonid */
-    display: flex; /* Kasuta flexboxi */
-    justify-content: center; /* Horisontaalne tsentreerimine */
-    align-items: center; /* Vertikaalne tsentreerimine */
+    cursor: pointer;
+    z-index: 10; 
+    transition: transform 0.2s ease, background-color 0.3s ease; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
 }
 
 /* Hover efekt nupule */
 .nupp_postril:hover {
-    background-color: #637074; /* Hoveri ajal muutub tumedamaks */
-    transform: scale(1.2); /* Hoveri ajal muutub veidi suuremaks */
+    background-color: #637074; 
+    transform: scale(1.2); 
 }
 
 .nupp_postril:focus {
-    outline: none; /* Eemalda fokuseerimise äärejoon */
-    background-color: #4f5a63; /* Väike muudatus taustavärvis */
+    outline: none; 
+    background-color: #4f5a63; 
 }
 
 .dropdown {
-    display: block; /* Peidame menüü alguses */
+    display: block; 
     position: absolute;
     top: 40px;
     right: 10px;
@@ -174,15 +174,15 @@ main, #watched-list, #to-watch-list{
     display: block;
 }
 .dropdown.show {
-    display: block; /* Dropdown on nähtav */
-    opacity: 1; /* Muudab läbipaistvuse täisväärtuseks */
-    pointer-events: auto; /* Luba nuppudele reageerimine, kui dropdown on nähtav */
+    display: block; 
+    opacity: 1; 
+    pointer-events: auto;
 }
 .hidden {
     display: none;
 }
 
-/* Kinnitusbox */
+/* Kinnitusbox lehdtedele*/
 .confirmation {
     position: fixed;
     top: 10%;
@@ -212,7 +212,7 @@ main, #watched-list, #to-watch-list{
     }
 }
 
-/* Üldine stiil nuppudele */
+/* Üldine stiil nuppudele plaanis lehel */
 .buttons-container {
     display: flex;
     justify-content: space-around;
@@ -220,34 +220,28 @@ main, #watched-list, #to-watch-list{
 }
 
 .buttons-container button {
-    background-color: #8693AB; /* Taustavärv */
+    background-color: #0ac053; 
     border: none;
-    border-radius: 10px; /* Ümarad servad */
-    color: white; /* Teksti värv */
-    font-size: 1rem; /* Teksti suurus */
+    border-radius: 10px; 
+    color: white; 
+    font-size: 1rem; 
     font-weight: bold;
-    padding: 0.5rem 1rem; /* Nupu seesmine polster */
+    padding: 0.5rem 1rem; 
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.3s ease; /* Sujuv üleminek */
+    transition: transform 0.2s ease, background-color 0.3s ease; 
 }
 
 /* Hover-efekt nuppudele */
 .buttons-container button:hover {
-    background-color: #637074; /* Hoveril tumedam värv */
-    transform: scale(1.1); /* Hoveril veidi suurem */
+    background-color: #07af37; 
+    transform: scale(1.1); 
 }
 
-/* Fokus-efekt nuppudele */
-.buttons-container button:focus {
-    outline: none; /* Eemalda fokuseerimise äärejoon */
-    background-color: #4f5a63; /* Fokusel tumedam taust */
-}
 
-/* Eraldi värvistiil kustutamise nupule */
 .buttons-container button:nth-child(2) {
-    background-color: #FF6B6B; /* Punane värv kustutamiseks */
+    background-color: #FF6B6B; 
 }
 
 .buttons-container button:nth-child(2):hover {
-    background-color: #FF4C4C; /* Hoveril veelgi intensiivsem punane */
+    background-color: #FF4C4C; 
 }
