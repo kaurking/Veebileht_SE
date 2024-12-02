@@ -36,6 +36,16 @@ function displayMovies(container, movies, emptyMessage, isToWatch = false) {
               <h3>${movie.title}</h3>
           </div>`;
 
+      // Lisa reitinguväli ainult "vaadatud.html" lehele
+      if (window.location.pathname.includes("vaadatud.html")) {
+          movieEl.innerHTML += `
+          <div class="rating-container">
+              <input type="number" class="rating" id="rating-${index}" min="1" max="5" 
+                     value="${movie.rating || ''}" placeholder="Rate" 
+                     onchange="updateRating(${index}, this.value)">
+          </div>`;
+      }
+
       if (isToWatch) {
           // Lisa nupud ainult "plaanis" lehele
           const buttonsContainer = document.createElement("div");
@@ -82,4 +92,13 @@ function deleteFromToWatch(index) {
 
   alert(`"${movie.title}" kustutati vaatamise plaanist.`);
   window.location.reload(); // Värskenda lehte, et muudatused kajastuksid
+}
+
+// Funktsioon reitingu uuendamiseks
+function updateRating(index, value) {
+  const watchedMovies = JSON.parse(localStorage.getItem("watchedMovies")) || [];
+  if (watchedMovies[index]) {
+      watchedMovies[index].rating = value;
+      localStorage.setItem("watchedMovies", JSON.stringify(watchedMovies));
+  }
 }

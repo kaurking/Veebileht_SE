@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sisend</title>
-    <link rel="stylesheet" href ="kujundus_üldine.css">
-    <link rel="stylesheet" href= "filmide_kujundus.css">
+    <link rel="stylesheet" href="kujundus_üldine.css">
+    <link rel="stylesheet" href="filmide_kujundus.css">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <ul class="nav-links">
             <li><a href="main.html">Filmid</a></li>
@@ -19,23 +19,18 @@
         </ul>
     </nav>
 
+    <!-- Search Form -->
     <header>
         <form id="form">
-            <input type="text" id="search" placeholder="Otsi filme..." required
-            class="search">
+            <input type="text" id="search" placeholder="Otsi filme või animeid..." required class="search">
         </form>
     </header>
 
     <main id="main">
-        <div class="movie">
-            <button class ="nupp_postril">+</button>
-            <div class="dropdown">
-                <button class="dropdown-item" onclick="markAsWatched()">Vaadatud</button>
-                <button class="dropdown-item" onclick="markAsToWatch()">Plaanis</button>
-            </div>
-        </div>
+        <!-- filmid ja animed tulevad siia-->
     </main>
-    
+
+    <!-- JavaScript -->
     <script src="pealeht.js"></script>
     <script src="vaadatud_plaanis.js"></script>
 </body>
