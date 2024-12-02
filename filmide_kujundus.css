@@ -38,10 +38,12 @@ header{
     color: rgb(78, 77, 78)
 }
 
-main{
+main, #watched-list, #to-watch-list{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 20px; /* Kaartide vahe */
+    padding: 1rem;
 }
 
 .movie {
@@ -178,4 +180,74 @@ main{
 }
 .hidden {
     display: none;
+}
+
+/* Kinnitusbox */
+.confirmation {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    z-index: 1000;
+    opacity: 0.9;
+    animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 0.9;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+/* Üldine stiil nuppudele */
+.buttons-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.buttons-container button {
+    background-color: #8693AB; /* Taustavärv */
+    border: none;
+    border-radius: 10px; /* Ümarad servad */
+    color: white; /* Teksti värv */
+    font-size: 1rem; /* Teksti suurus */
+    font-weight: bold;
+    padding: 0.5rem 1rem; /* Nupu seesmine polster */
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Sujuv üleminek */
+}
+
+/* Hover-efekt nuppudele */
+.buttons-container button:hover {
+    background-color: #637074; /* Hoveril tumedam värv */
+    transform: scale(1.1); /* Hoveril veidi suurem */
+}
+
+/* Fokus-efekt nuppudele */
+.buttons-container button:focus {
+    outline: none; /* Eemalda fokuseerimise äärejoon */
+    background-color: #4f5a63; /* Fokusel tumedam taust */
+}
+
+/* Eraldi värvistiil kustutamise nupule */
+.buttons-container button:nth-child(2) {
+    background-color: #FF6B6B; /* Punane värv kustutamiseks */
+}
+
+.buttons-container button:nth-child(2):hover {
+    background-color: #FF4C4C; /* Hoveril veelgi intensiivsem punane */
 }

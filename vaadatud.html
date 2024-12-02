@@ -3,18 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vaadatud/loetud nimekiri</title>
+    <title>Vaadatud nimekiri</title>
     <link rel="stylesheet" href="kujundus_üldine.css">
+    <link rel="stylesheet" href= "filmide_kujundus.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <ul class="nav-links">
             <li><a href="main.html">Sisend</a></li>
-            <li><a href="vaadatud.html">Vaadatud/loetud</a></li>
+            <li><a href="vaadatud.html">Vaadatud</a></li>
             <li><a href="plaanis.html">Plaanis</a></li>
             <li><a href="profiil.html">Profiil</a></li>
         </ul>
     </nav>
-    <h1>Vaadatud</h1>
+    <h1>Vaadatud filmid</h1>
+    <main id="main" class="main">
+        <div id="watched-list" class="movie-list"></div>
+    </main>
+    <script src="vaadatud_plaanis.js"></script>
 </body>
 </html>
