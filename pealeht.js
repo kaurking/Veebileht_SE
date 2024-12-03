@@ -1,12 +1,8 @@
-//Anime api integreerimine on ChatGPT-ga kirjutatud
-
-
-
 // Defineerime globaalsed muutujad
-let watchedMovies = JSON.parse(localStorage.getItem("watchedMovies")) || [];
-let toWatchMovies = JSON.parse(localStorage.getItem("toWatchMovies")) || [];
+let watchedMovies = JSON.parse(localStorage.getItem("watchedMovies")) || []; // Lae vaadatud filmid localStorage'ist või tühjenda, kui pole
+let toWatchMovies = JSON.parse(localStorage.getItem("toWatchMovies")) || []; // Lae vaatamiseks lisatud filmid localStorage'ist või tühjenda, kui pole
 
-//Filmide API-d
+// Filmide API-d
 const API_KEY = "api_key=8e6d18d487ad8e90c75fcab44d14ee54";
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY;
@@ -25,7 +21,7 @@ const search = document.getElementById('search');
 // võtab suvalised filmid ja animed
 fetchDefaultContent();
 
-// võtab suvalised filmid ja animed
+// Fetch default content (popular movies and anime)
 async function fetchDefaultContent() {
     try {
         const main = document.getElementById('main');
@@ -62,10 +58,9 @@ async function fetchDefaultContent() {
     }
 }
 
-
+// Fetch search results (movies and anime)
 async function fetchAndDisplayCombined(searchTerm) {
     try {
-
         const [moviesResponse, animeResponse] = await Promise.all([
             fetch(searchURL + '&query=' + encodeURIComponent(searchTerm)),
             fetch(`${ANIME_SEARCH_URL}${encodeURIComponent(searchTerm)}`)
@@ -96,6 +91,7 @@ async function fetchAndDisplayCombined(searchTerm) {
     }
 }
 
+// Display results
 function displayCombinedResults(data) {
     if (!main) {
         console.error("Element with ID 'main' not found.");
@@ -111,7 +107,7 @@ function displayCombinedResults(data) {
             console.warn(`No poster available for ${type}: "${title}"`);
             return;
         }
-// üks filmi aken
+
         const itemEl = document.createElement("div");
         itemEl.classList.add("movie");
         itemEl.innerHTML = `
@@ -134,27 +130,26 @@ function displayCombinedResults(data) {
     setupDropdowns();
 }
 
-
+// Setup dropdown for options
 function setupDropdowns() {
     document.querySelectorAll(".nupp_postril").forEach((button) => {
         const dropdown = button.nextElementSibling;
 
         button.addEventListener("click", (e) => {
             e.stopPropagation(); // Takistab sündmuse levikut 
-
-               // Sulge kõik teised dropdownid
+            
+            // Sulge kõik teised dropdownid
             document.querySelectorAll(".dropdown").forEach((otherDropdown) => {
                 if (otherDropdown !== dropdown) {
                     otherDropdown.classList.add("hidden");
                 }
             });
 
-             // Lülita praeguse dropdowni nähtavus
             dropdown.classList.toggle("hidden");
         });
     });
 
-// Peidame kõik dropdownid, kui klikitakse mujale
+    // Peidame kõik dropdownid, kui klikitakse mujale
     document.addEventListener("click", () => {
         document.querySelectorAll(".dropdown").forEach((dropdown) => {
             dropdown.classList.add("hidden");
@@ -162,11 +157,55 @@ function setupDropdowns() {
     });
 }
 
+// Visuaalne kinnitus filmi lisamisel
+function showConfirmation(message) {
+    const confirmation = document.createElement("div");
+    confirmation.classList.add("confirmation");
+    confirmation.innerText = message;
+
+    document.body.appendChild(confirmation);
+    setTimeout(() => {
+        confirmation.remove();
+    }, 3000);
+}
+
+// Lisa vaadatud nimekirja
+function markAsWatched(title, poster_path) {
+    if (!poster_path) {
+        console.error(`Poster path is missing for "${title}"`);
+        return;
+    }
+
+    if (!watchedMovies.some(movie => movie.title === title)) {
+        watchedMovies.push({ title, imageSrc: poster_path });
+        localStorage.setItem("watchedMovies", JSON.stringify(watchedMovies));
+        showConfirmation(`"${title}" lisati vaadatud nimekirja.`); // Show confirmation message
+    } else {
+        showConfirmation(`"${title}" on juba vaadatud nimekirjas.`);
+    }
+}
+
+// Lisa vaatamiseks nimekirja
+function markAsToWatch(title, poster_path) {
+    if (!poster_path) {
+        console.error(`Poster path is missing for "${title}"`);
+        return;
+    }
+
+    if (!toWatchMovies.some(movie => movie.title === title)) {
+        toWatchMovies.push({ title, imageSrc: poster_path });
+        localStorage.setItem("toWatchMovies", JSON.stringify(toWatchMovies));
+        showConfirmation(`"${title}" lisati vaatamise plaani!`); // Show confirmation message
+    } else {
+        alert(`"${title}" on juba vaatamise plaanis.`);
+    }
+}
+
 // kui form submittib
 if (form) {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const searchTerm = search.value.trim(); // pmst python .strip()
+        const searchTerm = search.value.trim();
 
         if (searchTerm) {
             await fetchAndDisplayCombined(searchTerm); // kuva seach results
@@ -176,32 +215,5 @@ if (form) {
     });
 }
 
-// Lisa vaadatud nimekirja
-function markAsWatched(title, poster_path) {
-  if (!poster_path) {
-      console.error(`Poster path is missing for "${title}"`); // Lisatud logiväljund
-      return;
-  }
-
-  if (!watchedMovies.some(movie => movie.title === title)) {
-      watchedMovies.push({ title, imageSrc: poster_path });
-      localStorage.setItem("watchedMovies", JSON.stringify(watchedMovies)); // Veendu, et IMG_URL on lisatud
-      alert(`"${title}" marked as watched!`);
-  } else {
-      alert(`"${title}" is already in the watched list.`);
-  }
-}
-function markAsToWatch(title, poster_path) {
-  if (!poster_path) {
-      console.error(`Poster path is missing for "${title}"`);
-      return;
-  }
-
-  if (!toWatchMovies.some(movie => movie.title === title)) {
-      toWatchMovies.push({ title, imageSrc: poster_path });
-      localStorage.setItem("toWatchMovies", JSON.stringify(toWatchMovies));
-      alert(`"${title}" added to the to-watch list!`);
-  } else {
-      alert(`"${title}" is already in the to-watch list.`);
-  }
-}
+// Kutsu filmi laadimise funktsioon esmakordselt, et kuvada populaarsed filmid
+fetchDefaultContent();
