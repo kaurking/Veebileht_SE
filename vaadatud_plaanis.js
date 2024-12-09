@@ -1,104 +1,114 @@
+// Kood tehtud ChatGPT-ga
+// Kui leht on täielikult laadinud
 window.onload = () => {
-  const watchedList = document.getElementById("watched-list");
-  const toWatchList = document.getElementById("to-watch-list");
+    const watchedList = document.getElementById("watched-list"); // Vaadatud filmide konteiner
+    const toWatchList = document.getElementById("to-watch-list"); // Vaatamiseks lisatud filmide konteiner
 
-  if (watchedList) {
-      const watchedMovies = JSON.parse(localStorage.getItem("watchedMovies")) || [];
-      displayMovies(watchedList, watchedMovies, "Siin pole veel ühtegi vaadatud filmi.");
-  }
+    // Kui leht sisaldab "watched-list" elementi, laadi vaadatud filmid
+    if (watchedList) {
+        const watchedMovies = JSON.parse(localStorage.getItem("watchedMovies")) || []; // Loe vaadatud filme localStorage'ist
+        displayMovies(watchedList, watchedMovies, "Siin pole veel ühtegi vaadatud filmi."); // Kuvab vaadatud filmid
+    }
 
-  if (toWatchList) {
-      const toWatchMovies = JSON.parse(localStorage.getItem("toWatchMovies")) || [];
-      displayMovies(toWatchList, toWatchMovies, "Siin pole veel ühtegi vaatamiseks lisatud filmi.", true);
-  }
+    // Kui leht sisaldab "to-watch-list" elementi, laadi vaatamiseks lisatud filmid
+    if (toWatchList) {
+        const toWatchMovies = JSON.parse(localStorage.getItem("toWatchMovies")) || []; // Loe vaatamiseks lisatud filme localStorage'ist
+        displayMovies(toWatchList, toWatchMovies, "Siin pole veel ühtegi vaatamiseks lisatud filmi.", true); // Kuvab vaatamiseks filmid
+    }
 };
 
-// Funktsioon filmide kuvamiseks
+// Funktsioon filmide kuvamiseks antud konteineris
 function displayMovies(container, movies, emptyMessage, isToWatch = false) {
-  container.innerHTML = ""; // Tühjenda konteiner
+    container.innerHTML = ""; // Tühjenda konteiner enne sisu lisamist
 
-  if (movies.length === 0) {
-      container.innerHTML = `<p>${emptyMessage}</p>`;
-      return;
-  }
+    // Kui filme pole, näita vastavat sõnumit
+    if (movies.length === 0) {
+        container.innerHTML = `<p>${emptyMessage}</p>`;
+        return;
+    }
 
-  movies.forEach((movie, index) => {
-      if (!movie.imageSrc) {
-          console.error(`Missing image source for movie: "${movie.title}"`); // Veateade
-          return;
-      }
+    // Loo iga filmi jaoks HTML-elemendid
+    movies.forEach((movie, index) => {
+        // Kontrolli, kas filmi pilditee on olemas
+        if (!movie.imageSrc) {
+            console.error(`Missing image source for movie: "${movie.title}"`); // Kuvab vea konsoolis
+            return;
+        }
 
-      const movieEl = document.createElement("div");
-      movieEl.classList.add("movie");
-      movieEl.innerHTML = `
-          <img src="${movie.imageSrc}" alt="${movie.title}">
-          <div class="movie-info">
-              <h3>${movie.title}</h3>
-          </div>`;
+        const movieEl = document.createElement("div"); // Loo konteiner ühe filmi jaoks
+        movieEl.classList.add("movie"); // Lisa klass stiilide rakendamiseks
+        movieEl.innerHTML = `
+            <img src="${movie.imageSrc}" alt="${movie.title}"> 
+            <div class="movie-info">
+                <h3>${movie.title}</h3>
+            </div>`;
 
-      // Lisa reitinguväli ainult "vaadatud.html" lehele
-      if (window.location.pathname.includes("vaadatud.html")) {
-          movieEl.innerHTML += `
-          <div class="rating-container">
-              <input type="number" class="rating" id="rating-${index}" min="1" max="5" 
-                     value="${movie.rating || ''}" placeholder="Rate" 
-                     onchange="updateRating(${index}, this.value)">
-          </div>`;
-      }
+        // Kui leht on "vaadatud.html", lisa reitinguväli
+        if (window.location.pathname.includes("vaadatud.html")) {
+            movieEl.innerHTML += `
+            <div class="rating-container">
+                <input type="number" class="rating" id="rating-${index}" min="1" max="5" 
+                       value="${movie.rating || ''}" placeholder="Rate" 
+                       onchange="updateRating(${index}, this.value)">
+            </div>`;
+        }
 
-      if (isToWatch) {
-          // Lisa nupud ainult "plaanis" lehele
-          const buttonsContainer = document.createElement("div");
-          buttonsContainer.classList.add("buttons-container");
+        // Kui leht on "plaanis.html", lisa nupud
+        if (isToWatch) {
+            const buttonsContainer = document.createElement("div"); // Nuppude konteiner
+            buttonsContainer.classList.add("buttons-container");
 
-          const watchedButton = document.createElement("button");
-          watchedButton.innerText = "Vaadatud";
-          watchedButton.onclick = () => moveToWatched(index);
+            // Lisa "Vaadatud" nupp
+            const watchedButton = document.createElement("button");
+            watchedButton.innerText = "Vaadatud";
+            watchedButton.onclick = () => moveToWatched(index);
 
-          const deleteButton = document.createElement("button");
-          deleteButton.innerText = "Kustuta";
-          deleteButton.onclick = () => deleteFromToWatch(index);
+            // Lisa "Kustuta" nupp
+            const deleteButton = document.createElement("button");
+            deleteButton.innerText = "Kustuta";
+            deleteButton.onclick = () => deleteFromToWatch(index);
 
-          buttonsContainer.appendChild(watchedButton);
-          buttonsContainer.appendChild(deleteButton);
-          movieEl.appendChild(buttonsContainer);
-      }
+            // Lisa nupud konteinerisse
+            buttonsContainer.appendChild(watchedButton);
+            buttonsContainer.appendChild(deleteButton);
+            movieEl.appendChild(buttonsContainer);
+        }
 
-      container.appendChild(movieEl);
-  });
+        container.appendChild(movieEl); // Lisa filmi element konteinerisse
+    });
 }
 
-// Funktsioon filmi liigutamiseks "vaadatud" lehele
+// Funktsioon filmi liigutamiseks "vaadatud" nimekirja
 function moveToWatched(index) {
-  const toWatchMovies = JSON.parse(localStorage.getItem("toWatchMovies")) || [];
-  const watchedMovies = JSON.parse(localStorage.getItem("watchedMovies")) || [];
+    const toWatchMovies = JSON.parse(localStorage.getItem("toWatchMovies")) || []; // Lae vaatamiseks filmid
+    const watchedMovies = JSON.parse(localStorage.getItem("watchedMovies")) || []; // Lae vaadatud filmid
 
-  const movie = toWatchMovies.splice(index, 1)[0];
-  watchedMovies.push(movie);
+    const movie = toWatchMovies.splice(index, 1)[0]; // Eemalda film vaatamise plaanist
+    watchedMovies.push(movie); // Lisa see vaadatud nimekirja
 
-  localStorage.setItem("toWatchMovies", JSON.stringify(toWatchMovies));
-  localStorage.setItem("watchedMovies", JSON.stringify(watchedMovies));
+    // Salvesta uuendatud nimekirjad localStorage'i
+    localStorage.setItem("toWatchMovies", JSON.stringify(toWatchMovies));
+    localStorage.setItem("watchedMovies", JSON.stringify(watchedMovies));
 
-  alert(`"${movie.title}" liigutati vaadatud nimekirja.`);
-  window.location.reload(); // Värskenda lehte, et muudatused kajastuksid
+    alert(`"${movie.title}" liigutati vaadatud nimekirja.`); // Kuvab kinnituse
+    window.location.reload(); // Värskenda lehte, et muudatused rakenduksid
 }
 
-// Funktsioon filmi kustutamiseks "plaanis" lehelt
+// Funktsioon filmi kustutamiseks "plaanis" nimekirjast
 function deleteFromToWatch(index) {
-  const toWatchMovies = JSON.parse(localStorage.getItem("toWatchMovies")) || [];
-  const movie = toWatchMovies.splice(index, 1)[0];
+    const toWatchMovies = JSON.parse(localStorage.getItem("toWatchMovies")) || []; // Lae vaatamiseks filmid
+    const movie = toWatchMovies.splice(index, 1)[0]; // Eemalda film nimekirjast
 
-  localStorage.setItem("toWatchMovies", JSON.stringify(toWatchMovies));
-
-  alert(`"${movie.title}" kustutati vaatamise plaanist.`);
-  window.location.reload(); // Värskenda lehte, et muudatused kajastuksid
+    localStorage.setItem("toWatchMovies", JSON.stringify(toWatchMovies)); // Salvesta uuendatud nimekiri
+    alert(`"${movie.title}" kustutati vaatamise plaanist.`); // Kuvab kinnituse
+    window.location.reload(); // Värskenda lehte, et muudatused rakenduksid
 }
 
-// Funktsioon reitingu uuendamiseks
+// Funktsioon reitingu uuendamiseks "vaadatud" nimekirjas
 function updateRating(index, value) {
-  const watchedMovies = JSON.parse(localStorage.getItem("watchedMovies")) || [];
-  if (watchedMovies[index]) {
-      watchedMovies[index].rating = value;
-      localStorage.setItem("watchedMovies", JSON.stringify(watchedMovies));
-  }
+    const watchedMovies = JSON.parse(localStorage.getItem("watchedMovies")) || []; // Lae vaadatud filmid
+    if (watchedMovies[index]) {
+        watchedMovies[index].rating = value; // Uuenda filmi reitingut
+        localStorage.setItem("watchedMovies", JSON.stringify(watchedMovies)); // Salvesta muudatused localStorage'i
+    }
 }
